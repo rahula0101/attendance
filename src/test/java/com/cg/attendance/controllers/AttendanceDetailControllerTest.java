@@ -1,52 +1,59 @@
 package com.cg.attendance.controllers;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
 import com.cg.attendance.entities.AttendanceDetail;
-import com.cg.attendance.exception.CustomResponseEntityExceptionHandler;
+import com.cg.attendance.entities.Employee;
 import com.cg.attendance.services.AttendanceDetailService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = AttendanceDetailController.class)
+@SpringBootTest
 class AttendanceDetailControllerTest {
-	
-	@Autowired
-	MockMvc mockMvc;
-	
-	@MockBean
-	AttendanceDetailService attendanceService;
+
 	@InjectMocks
-    private AttendanceDetail attendanceController;
-	private JacksonTester<AttendanceDetail> attendanceDetail;
-	@BeforeEach
-    public void setup() {
-        // We would need this line if we would not use the MockitoExtension
-        // MockitoAnnotations.initMocks(this);
-        // Here we can't use @AutoConfigureJsonTesters because there isn't a Spring context
-        JacksonTester.initFields(this, new ObjectMapper());
-               mockMvc = MockMvcBuilders.standaloneSetup(attendanceController)
-                .setControllerAdvice(new CustomResponseEntityExceptionHandler())
-                 .build();
-    }
-//    @Test
-//	void testAddNewAttendance() throws Exception {
-//    	MockHttpServletResponse response = mockMvc.perform(
-//                post("/api/attendanceapplication/add-attendance").contentType(MediaType.APPLICATION_JSON).content(
-//                        attendanceDetail.write(new AttendanceDetail("1","8:30","18:00","2020-12-01","")).getJson()
-//                )).andReturn().getResponse();
-//
-//        // then
-//        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-//	}
+	AttendanceDetailController attenDanceController;
+
+	@Mock
+	AttendanceDetailService service;
+
+	@Test
+	public void viewAttendanceByIdTest() {
+
+		Employee employee = new Employee("46045170", "Suparna Arya", "7980064539", "suparna.arya@capgemini.com",
+				"Bangalore", "46045157", null);
+
+		AttendanceDetail attendance1 = new AttendanceDetail("10:10", "14:30", null, "", "", "APPLIED", employee);
+
+		when(service.viewAttendanceByAttendanceId(any(String.class))).thenReturn(attendance1);
+
+		ResponseEntity<?> responseEntity = attenDanceController.viewAttendanceById("1");
+		assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+
+	}
+
+	@Test
+	public void updateAttendanceStatusTest() {
+
+		Employee employee = new Employee("46045170", "Suparna Arya", "7980064539", "suparna.arya@capgemini.com",
+				"Bangalore", "46045157", null);
+
+		AttendanceDetail attendance1 = new AttendanceDetail("10:10", "14:30", null, "", "", "APPLIED", employee);
+
+		when(service.updateAttendanceStatus("1", "APPROVED")).thenReturn(attendance1);
+
+		ResponseEntity<?> responseEntity = attenDanceController.viewAttendanceById("1");
+		assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
+
+	}
 
 }

@@ -1,3 +1,5 @@
+com/cg/attendance/controllers/EmployeeControllerTestCase.class
+com/cg/attendance/controllers/AttendanceDetailControllerTest.class
 com/cg/attendance/AttendanceApplicationTests.class
 com/cg/attendance/services/AttendanceDetailServiceTest.class
-com/cg/attendance/controllers/AttendanceDetailControllerTest.class
+com/cg/attendance/services/EmployeeServiceTest.class

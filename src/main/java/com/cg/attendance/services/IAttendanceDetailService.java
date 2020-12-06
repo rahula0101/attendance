@@ -30,6 +30,4 @@ public interface IAttendanceDetailService {
 	 */
     public AttendanceDetail viewAttendanceByAttendanceId(String attendanceId);
     
-    
 }
-

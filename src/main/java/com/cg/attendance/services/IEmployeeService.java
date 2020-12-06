@@ -36,12 +36,4 @@ public interface IEmployeeService {
 	 * @return List of AttendanceDetails
 	 */
 	public List<AttendanceDetail> viewAttendanceByEmpId(String empId);
-//	/**
-//	 * This method validate SupervisorId with condition applied
-//	 * @param emp
-//	 * @param supervisiorId
-//	 * @return String of message
-//	 */
-//
-//	public String validateSupervisior(Employee emp, long supervisiorId);
 }

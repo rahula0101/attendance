@@ -34,8 +34,7 @@ public class AttendanceDetailController {
 	public ResponseEntity<?> viewAttendanceById(@PathVariable String id) throws AttendanceIDException {
 		return new ResponseEntity<AttendanceDetail>(attendanceService.viewAttendanceByAttendanceId(id), HttpStatus.OK);
 	}
-	
-	
+
 	@PostMapping("/attendance/add")
 	public ResponseEntity<?> addNewAttendance(@Valid @RequestBody AttendanceDto attendance, BindingResult result)
 			throws AttendanceIDException {
@@ -48,8 +47,10 @@ public class AttendanceDetailController {
 	}
 
 	@PutMapping("/attendance/update/{id}/{updateType}")
-	public ResponseEntity<?> updateAttendanceByStatus(@PathVariable String id, @PathVariable String updateType) throws AttendanceIDException {
-		return new ResponseEntity<AttendanceDetail>(attendanceService.updateAttendanceStatus(id, updateType), HttpStatus.OK);
+	public ResponseEntity<?> updateAttendanceByStatus(@PathVariable String id, @PathVariable String updateType)
+			throws AttendanceIDException {
+		return new ResponseEntity<AttendanceDetail>(attendanceService.updateAttendanceStatus(id, updateType),
+				HttpStatus.OK);
 
 	}
 
