@@ -34,7 +34,8 @@ public class AttendanceDetailController {
 	public ResponseEntity<?> viewAttendanceById(@PathVariable String id) throws AttendanceIDException {
 		return new ResponseEntity<AttendanceDetail>(attendanceService.viewAttendanceByAttendanceId(id), HttpStatus.OK);
 	}
-
+	
+	
 	@PostMapping("/attendance/add")
 	public ResponseEntity<?> addNewAttendance(@Valid @RequestBody AttendanceDto attendance, BindingResult result)
 			throws AttendanceIDException {

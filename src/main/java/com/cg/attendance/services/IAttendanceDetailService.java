@@ -29,5 +29,7 @@ public interface IAttendanceDetailService {
 	 * @return AttendanceDetail object
 	 */
     public AttendanceDetail viewAttendanceByAttendanceId(String attendanceId);
+    
+    
 }
 
